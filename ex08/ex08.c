@@ -8,46 +8,48 @@ void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES],int n, int src){
     int dist[MAX_VERTICES];
     int visited[MAX_VERTICES];
     int parent[MAX_VERTICES];
-  for (int = 0; i<n; ++i){
-      dist[i] = INFINITY;
-      visited[i] = 0;
-  }
-  dist[src] = 0;
-  parent[src] =-1;
+    for (int i = 0; i < n; ++i){
+        dist[i] = INFINITY;
+        visited[i] = 0;
+    }
+    dist[src] = 0;
+    parent[src] = -1;
   
-  for (int count = 0; count < n - 1; ++count){
-      int u=-1;
-      for (int v =0;v < n; ++V){
-          if(!visited[v] && (u == -1 || dist[u])){
-              u = v;
-          }
-      }
-      if (u == -1 || dist[u] == INFINITY){
-          break;
-      }
-      visited[u] = 1;
+    for (int count = 0; count < n - 1; ++count){
+        int u=-1;
+        for (int v = 0;v < n; ++v){
+            if(!visited[v] && (u == -1 || dist[u])){
+                u = v;
+            }
+        }
+        if (u == -1 || dist[u] == INFINITY){
+            break;
+        }
+        visited[u] = 1;
       
-      for (int v=0;v<n; ++v){
-        if(!visited[v] && graph[u][v] && dist[u] ! = INFINITY && dist[u] + graph[u][v] < dist[v]){
-            dist[v] = dist[v] = dist[u] + graph[u][v];
-            parent[v] = u;
+        for (int v=0;v<n; ++v){
+            if(!visited[v] && graph[u][v] && dist[u] != INFINITY && dist[u] + graph[u][v] < dist[v]){
+                dist[v] = dist[v] = dist[u] + graph[u][v];
+                parent[v] = u;
+            }
         }
     }
-}
 
-printf("\nShortedt paths from Source Vertex %d:\n", src);
-for (int i = 0; i < n; ++1){
-    if(i !=src){
-        if(dist[i] == INFINITY){
-            printf("Path to vertex %d: Unreachable\n", i);
-        } else{
-            printf("Path to vertex %d: Cost = %d | path = %d", i, dist[i], i);
-            int p = parent[i];
-            while (p !=-1){
-                printf(" <- %d", p);
-                p = parent[p];
+
+    printf("\nShortedt paths from Source Vertex %d:\n", src);
+    for (int i = 0; i < n; ++i){
+        if(i !=src){
+            if(dist[i] == INFINITY){
+                printf("Path to vertex %d: Unreachable\n", i);
+            } else{
+                printf("Path to vertex %d: Cost = %d | path = %d", i, dist[i], i);
+                int p = parent[i];
+                while (p !=-1){
+                    printf(" <- %d", p);
+                    p = parent[p];
+                }
+                printf("\n");
             }
-            printf("\n");
         }
     }
 }
